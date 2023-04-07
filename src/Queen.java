@@ -1,5 +1,11 @@
 import java.awt.Color;
+import java.io.File;
 import java.util.List;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import java.util.ArrayList;
 
 import javalib.worldimages.Posn;
@@ -76,6 +82,15 @@ public class Queen extends LongMovingPiece {
     return this.movedTo(posn);
   }
   
-  
+  public void playSound() {
+    try {
+      Clip clip = AudioSystem.getClip();
+      AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("src/sounds/doorbell.wav"));
+      clip.open(inputStream);
+      clip.start();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
 }

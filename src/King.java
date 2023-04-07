@@ -1,9 +1,14 @@
 import java.awt.Color;
+import java.io.File;
 import java.util.Map;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import javalib.worldimages.Posn;
 
@@ -95,5 +100,16 @@ public class King extends ShortMovingPiece {
 
   String uppercaseLetter() {
     return "K";
+  }
+  
+  public void playSound() {
+    try {
+      Clip clip = AudioSystem.getClip();
+      AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("src/sounds/fanfare.wav"));
+      clip.open(inputStream);
+      clip.start();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

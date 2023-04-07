@@ -1,5 +1,10 @@
 import java.awt.Color;
+import java.io.File;
 import java.util.List;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import javalib.worldimages.Posn;
 
@@ -79,4 +84,14 @@ public class Rook extends LongMovingPiece {
     return "R";
   }
 
+  public void playSound() {
+    try {
+      Clip clip = AudioSystem.getClip();
+      AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("src/sounds/bark.wav"));
+      clip.open(inputStream);
+      clip.start();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }

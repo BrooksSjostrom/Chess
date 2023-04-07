@@ -1,5 +1,10 @@
 import java.awt.Color;
+import java.io.File;
 import java.util.List;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import javalib.worldimages.Posn;
 
@@ -69,4 +74,14 @@ public class Bishop extends LongMovingPiece {
     return "B";
   }
 
+  public void playSound() {
+    try {
+      Clip clip = AudioSystem.getClip();
+      AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("src/sounds/church.wav"));
+      clip.open(inputStream);
+      clip.start();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }
