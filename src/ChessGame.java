@@ -105,6 +105,7 @@ public class ChessGame extends World implements ActionListener, ItemListener {
   
   public void onMouseClicked(Posn location) {
     Posn square = new Posn((int) Math.floor(location.x / this.tileSize), (int) Math.floor(location.y / this.tileSize));
+    Player player = this.whiteTurn ? this.white : this.black;
     List<Posn> actionPosns = this.possibleActions.stream()
         .map(Action::getLocation)
         .collect(Collectors.toList());
@@ -113,16 +114,17 @@ public class ChessGame extends World implements ActionListener, ItemListener {
           .filter(x -> x.getLocation().equals(square))
           .findAny()
           .orElseThrow();
-      this.board = action.apply(this.board);
-      action.playSound();
-      if (this.whiteTurn) {
-        this.gameLog.add(new ActionPair(action, new WuWei(), this.gameLog.size() + 1));
-      } else {
-        this.gameLog.get(this.gameLog.size() - 1).black = action;
-      }
-      this.whiteTurn = !this.whiteTurn;
-      this.selectedPiece = Optional.empty();
-      this.possibleActions = new ArrayList<>();
+      this.doAction(player, action);
+//      this.board = action.apply(this.board);
+//      action.playSound();
+//      if (this.whiteTurn) {
+//        this.gameLog.add(new ActionPair(action, new WuWei(), this.gameLog.size() + 1));
+//      } else {
+//        this.gameLog.get(this.gameLog.size() - 1).black = action;
+//      }
+//      this.whiteTurn = !this.whiteTurn;
+//      this.selectedPiece = Optional.empty();
+//      this.possibleActions = new ArrayList<>();
     } else if (!(this.whiteTurn ? this.white : this.black).canMoveAutomatically() && this.board.containsPiece(square, this.whiteTurn ? ChessColor.WHITE : ChessColor.BLACK)) {
       this.selectedPiece = Optional.of(this.board.pieces.get(square));
       this.possibleActions = this.selectedPiece.get().getActions(board);
@@ -134,7 +136,18 @@ public class ChessGame extends World implements ActionListener, ItemListener {
   
   public void onTick() {
     Player player = this.whiteTurn ? white : black;
-    // TODO: reconfigure so this only makes checks after a move, will need in different place of code
+    if (player.canMoveAutomatically()) {
+      Action action = player.getAutomaticAction(this.board);
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      this.doAction(player, action);
+    }
+  }
+  
+  public void doAction(Player player, Action action) {
     if (this.board.outOfActions(player.getColor())) {
       if (this.board.inCheck(player.getColor())) {
         this.endOfWorld(String.format("Checkmate %s wins", this.whiteTurn ? "black" : "white"));
@@ -150,28 +163,16 @@ public class ChessGame extends World implements ActionListener, ItemListener {
         this.endOfWorld("Stalemate");
       }
     }
-    if (player.canMoveAutomatically()) {
-      Action action = player.getAutomaticAction(this.board);
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-      this.board = action.apply(this.board);
-      action.playSound();
-      if (this.whiteTurn) {
-        this.gameLog.add(new ActionPair(action, new WuWei(), this.gameLog.size() + 1));
-      } else {
-        this.gameLog.get(this.gameLog.size() - 1).black = action;
-      }
-      this.whiteTurn = !this.whiteTurn;
-      this.selectedPiece = Optional.empty();
-      this.possibleActions = new ArrayList<>();
-//      System.out.println("--------");
-//      System.out.println(this.toUCIPosition());
-//      System.out.println(this.toEPD());
-//      System.out.println(this.toPGN());
+    this.board = action.apply(this.board);
+    action.playSound();
+    if (this.whiteTurn) {
+      this.gameLog.add(new ActionPair(action, new WuWei(), this.gameLog.size() + 1));
+    } else {
+      this.gameLog.get(this.gameLog.size() - 1).black = action;
     }
+    this.whiteTurn = !this.whiteTurn;
+    this.selectedPiece = Optional.empty();
+    this.possibleActions = new ArrayList<>();
   }
   
   public WorldScene lastScene(String msg) {
