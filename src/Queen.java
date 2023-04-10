@@ -93,4 +93,8 @@ public class Queen extends LongMovingPiece {
     }
   }
 
+  PieceType getType() {
+    return PieceType.QUEEN;
+  }
+
 }

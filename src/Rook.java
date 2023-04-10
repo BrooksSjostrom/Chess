@@ -94,4 +94,8 @@ public class Rook extends LongMovingPiece {
       e.printStackTrace();
     }
   }
+
+  PieceType getType() {
+    return PieceType.ROOK;
+  }
 }

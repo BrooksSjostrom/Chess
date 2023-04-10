@@ -89,4 +89,8 @@ public class Knight extends ShortMovingPiece {
       e.printStackTrace();
     }
   }
+
+  PieceType getType() {
+    return PieceType.KNIGHT;
+  }
 }

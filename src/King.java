@@ -112,4 +112,8 @@ public class King extends ShortMovingPiece {
       e.printStackTrace();
     }
   }
+
+  PieceType getType() {
+    return PieceType.KING;
+  }
 }

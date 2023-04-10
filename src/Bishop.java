@@ -84,4 +84,8 @@ public class Bishop extends LongMovingPiece {
       e.printStackTrace();
     }
   }
+
+  PieceType getType() {
+    return PieceType.BISHOP;
+  }
 }

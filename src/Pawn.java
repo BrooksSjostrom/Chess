@@ -151,4 +151,8 @@ public class Pawn extends Piece {
       e.printStackTrace();
     }
   }
+
+  PieceType getType() {
+    return PieceType.PAWN;
+  }
 }
