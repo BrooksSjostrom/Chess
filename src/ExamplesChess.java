@@ -81,13 +81,9 @@ class ExamplesChess {
   
   void testIterate(Tester t) {
     Board board = Board.start();
-//    Stream.iterate(new Posn(3, 7), board::inBounds, x -> Utils.add(x, new Posn(1, 0)))
-//    .peek(System.out::println);
     t.checkExpect(Stream.iterate(new Posn(3, 7), board::inBounds, x -> Utils.add(x, new Posn(1, 0)))
           .collect(Collectors.toList()), 
         List.of(new Posn(3, 7), new Posn(4, 7), new Posn(5, 7), new Posn(6, 7), new Posn(7, 7)));
-//    Stream.iterate(new Posn(3, 7), board::inBounds, x -> Utils.add(x, new Posn(1, 0)))
-//      .peek(System.out::println);
   }
   
   void testGetMovesInDirection(Tester t) {

@@ -71,14 +71,6 @@ public class Knight extends ShortMovingPiece {
     return "N";
   }
 
-//  List<Move> getMoves(Board currentState) {
-//    return kingDeltas.stream()
-//        .map(x -> Utils.add(x, this.position))
-//        .filter(Predicate.not(currentState::containsPiece))
-//        .map(x -> new Move(this, this.position, x))
-//        .collect(Collectors.toList());
-//  }
-
   public void playSound() {
     try {
       Clip clip = AudioSystem.getClip();

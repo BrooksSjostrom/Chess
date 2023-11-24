@@ -79,32 +79,15 @@ public class ChessGame extends World implements ActionListener, ItemListener {
   
   public WorldScene makeScene() {
     WorldScene result = this.getEmptyScene();
-//    for (int i = 0; i < 8; i++) {
-//      for (int j = 0; j < 8; j++) {
-//        WorldImage square = new RectangleImage(TILE_SIZE, TILE_SIZE, OutlineMode.SOLID, 
-//            (i + j) % 2 == 0 ? Color.WHITE : Color.BLACK);
-//        result.placeImageXY(square, TILE_SIZE * i + TILE_SIZE / 2, TILE_SIZE * j + TILE_SIZE / 2);
-//      }
-//    }
-//    return result;
     result = this.board.generateScene(result, this.pieceFolder, this.tileSize);
     if (this.selectedPiece.isPresent()) {
       Posn posn = this.selectedPiece.get().position;
       result.placeImageXY(new CircleImage(this.tileSize / 3, OutlineMode.OUTLINE, Color.GREEN), this.tileSize * posn.x + this.tileSize / 2, this.tileSize * posn.y + this.tileSize / 2);
     }
-//    this.possibleActions.stream()
-//      .forEachOrdered(action -> {
-//        Posn posn = action.getLocation();
-//        result.placeImageXY(new CircleImage(this.TILE_SIZE / 3, OutlineMode.OUTLINE, new Color(138, 43, 226)), this.tileSize * posn.x + TILE_SIZE / 2, TILE_SIZE * posn.y + TILE_SIZE / 2);
-//      });
     for (Action action : this.possibleActions) {
       Posn posn = action.getLocation();
       result.placeImageXY(new CircleImage(this.tileSize / 3, OutlineMode.OUTLINE, new Color(138, 43, 226)), this.tileSize * posn.x + this.tileSize / 2, this.tileSize * posn.y + this.tileSize / 2);
     }
-//    TextImage pgnText = new TextImage(this.toPGN(), this.tileSize / 4, Color.BLACK);
-//    result.placeImageXY(pgnText, this.tileSize * 9, this.tileSize * 4);
-//    WorldImage gameLogImage = new PhantomImage(this.gameLogImage(), this.tileSize * 2, this.tileSize / 4 * this.gameLog.size());
-//    result.placeImageXY(gameLogImage, this.tileSize * 8 + (int) gameLogImage.getWidth() / 2, (int) (gameLogImage.getHeight() / 2));
     return result;
   }
   
@@ -185,7 +168,6 @@ public class ChessGame extends World implements ActionListener, ItemListener {
           .flatMap(entry -> entry.getValue().getActions(this.board).stream())
           .map(Action::toSAN)
           .forEach(System.out::println);
-//          .collect(Collectors.toList());
     }
   }
   
@@ -215,7 +197,6 @@ public class ChessGame extends World implements ActionListener, ItemListener {
     return this.gameLog.stream()
         .map(ActionPair::toPGN)
         .map(text -> (WorldImage) new TextImage(text, this.tileSize / 4, Color.BLACK))
-//        .map(img -> (WorldImage) new PhantomImage(img, TILE_SIZE * 2, TILE_SIZE / 4))
         .reduce(new EmptyImage(), (a, b) -> new AboveAlignImage("left", a, b));
   }
   
@@ -225,7 +206,7 @@ public class ChessGame extends World implements ActionListener, ItemListener {
     System.setProperty("apple.awt.application.appearance", "system");
     this.bigBang(this.tileSize * 8, this.tileSize * 8, 0.01);
     this.theCanvas.frame.setTitle("Chess");
-    ImageIcon icon = new ImageIcon("src/pieces3/whitePawn.png");
+    ImageIcon icon = new ImageIcon("src/pieces/whitePawn.png");
     Taskbar taskbar = Taskbar.getTaskbar();
     taskbar.setIconImage(icon.getImage());
     JMenuBar menubar = new JMenuBar();

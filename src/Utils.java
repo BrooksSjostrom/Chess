@@ -12,10 +12,6 @@ public class Utils {
     return new Posn(m * p.x, m * p.y);
   }
   
-//  public static Color opposite(ChessColor color) {
-//    return Map.ofEntries(Map.entry(Color.BLACK, Color.WHITE), Map.entry(Color.WHITE, Color.BLACK)).get(color);
-//  }
-  
   public static String squareString(Posn square) {
     return "abcdefgh".charAt(square.x) + Integer.toString(8 - square.y);
   }

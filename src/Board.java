@@ -51,26 +51,15 @@ public class Board {
       .forEach(entry -> {
         Piece piece = entry.getValue();
         WorldImage img = new FromFileImage("src/" + pieceFolder + "/" + piece.filename());
-//        if (piece.name.equals("Pawn") || piece.name.equals("Queen") || piece.name.equals("Knight")) {
-//          img = new FromFileImage("src/pieces2/" + piece.filename());
-//          
-//        } else {
-//          img = new FromFileImage("src/pieces/" + piece.filename());
-//        }
         img = new ScaleImage(img, tileSize / img.getWidth());
         scene.placeImageXY(img, tileSize * piece.position.x + tileSize / 2, 
             tileSize * piece.position.y + tileSize / 2);
-//        if (piece.justMovedTwo()) {
-//          scene.placeImageXY(new RectangleImage(ChessGame.TILE_SIZE / 4, ChessGame.TILE_SIZE / 4, OutlineMode.OUTLINE, Color.blue), ChessGame.TILE_SIZE * piece.position.x + ChessGame.TILE_SIZE / 2, 
-//              ChessGame.TILE_SIZE * piece.position.y + ChessGame.TILE_SIZE / 2);
-//        }
       });
     return scene;
   }
   
   public boolean containsPiece(Posn posn) {
     return this.pieces.containsKey(posn);
-//    return this.containsPiece(posn, Color.BLACK) || this.containsPiece(posn, Color.WHITE);
   }
 
   public boolean containsPiece(Posn posn, ChessColor color) {
@@ -83,8 +72,6 @@ public class Board {
   
   public Piece pieceAt(Posn posn) {
     return this.pieces.get(posn);
-    
-//      throw new NullPointerException("No piece present at specified position.");
   }
   
   public List<Piece> getPiecesOfColor(ChessColor color) {

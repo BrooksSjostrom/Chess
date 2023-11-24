@@ -8,6 +8,7 @@ public class WuWei implements Action {
   }
 
   public Board apply(Board currentState) {
+    // Does nothing
     return currentState;
   }
 
