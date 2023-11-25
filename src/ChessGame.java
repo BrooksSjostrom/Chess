@@ -49,15 +49,14 @@ public class ChessGame extends World implements ActionListener, ItemListener {
   List<ActionPair> gameLog;
   
   JMenuItem humanVsHuman, humanVsAI, AIVsAI, increaseSize, decreaseSize;
-  JRadioButtonMenuItem pieces1, pieces3;
-  String pieceFolder = "pieces";
+  JRadioButtonMenuItem pieces1, pieces2, pieces3, pieces4;
+  String pieceFolder = "basic";
   int tileSize = 50;
   
   
   public ChessGame() {
 //    this(new RandumbAI("Black", Color.BLACK), new Human("White", Color.WHITE));
 //    this(new Human("Black", Color.BLACK), new Human("White", Color.WHITE));
-//    this(new SmartAI(2, Color.BLACK, "Black"), new Human("White", Color.WHITE));
 //    this(new GNUChessAI("Black", ChessColor.BLACK, 1000), new Human("White", ChessColor.WHITE));
     this(new AlphaBetaPruningAI("Black", ChessColor.BLACK), new Human("White", ChessColor.WHITE));
 //    this(new GNUChessAI("Black", Color.BLACK, 100), new GNUChessAI("White", Color.WHITE, 100));
@@ -206,7 +205,7 @@ public class ChessGame extends World implements ActionListener, ItemListener {
     System.setProperty("apple.awt.application.appearance", "system");
     this.bigBang(this.tileSize * 8, this.tileSize * 8, 0.01);
     this.theCanvas.frame.setTitle("Chess");
-    ImageIcon icon = new ImageIcon("src/pieces/whitePawn.png");
+    ImageIcon icon = new ImageIcon("src/pieces/basic/whitePawn.png");
     Taskbar taskbar = Taskbar.getTaskbar();
     taskbar.setIconImage(icon.getImage());
     JMenuBar menubar = new JMenuBar();
@@ -226,12 +225,20 @@ public class ChessGame extends World implements ActionListener, ItemListener {
     ButtonGroup pieceGroup = new ButtonGroup();
     this.pieces1 = new JRadioButtonMenuItem("Basic", true);
     pieces1.addActionListener(this);
-    this.pieces3 = new JRadioButtonMenuItem("Mr. Singer");
+    this.pieces2 = new JRadioButtonMenuItem("Caliente");
+    pieces2.addActionListener(this);
+    this.pieces3 = new JRadioButtonMenuItem("Chessnut");
     pieces3.addActionListener(this);
+    this.pieces4 = new JRadioButtonMenuItem("Fantasy");
+    pieces4.addActionListener(this);
     pieceGroup.add(pieces1);
+    pieceGroup.add(pieces2);
     pieceGroup.add(pieces3);
+    pieceGroup.add(pieces4);
     pieceMenu.add(pieces1);
+    pieceMenu.add(pieces2);
     pieceMenu.add(pieces3);
+    pieceMenu.add(pieces4);
     viewMenu.add(pieceMenu);
     this.increaseSize = new JMenuItem("Increase size");
     this.increaseSize.addActionListener(this);
@@ -260,9 +267,13 @@ public class ChessGame extends World implements ActionListener, ItemListener {
     } else if (e.getSource() == AIVsAI) {
       new ChessGame(new GNUChessAI("Black", ChessColor.BLACK, 100), new GNUChessAI("White", ChessColor.WHITE, 100)).launchGame();
     } else if (e.getSource() == pieces1) {
-      this.pieceFolder = "pieces";
+      this.pieceFolder = "basic";
+    } else if (e.getSource() == pieces2) {
+      this.pieceFolder = "caliente";
     } else if (e.getSource() == pieces3) {
-      this.pieceFolder = "pieces3";
+      this.pieceFolder = "chessnut";
+    } else if (e.getSource() == pieces4) {
+      this.pieceFolder = "fantasy";
     } else if (e.getSource() == increaseSize) {
       this.tileSize += 10;
       this.resize(this.tileSize * 8, this.tileSize * 8);

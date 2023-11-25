@@ -50,7 +50,7 @@ public class Board {
     pieces.entrySet().stream()
       .forEach(entry -> {
         Piece piece = entry.getValue();
-        WorldImage img = new FromFileImage("src/" + pieceFolder + "/" + piece.filename());
+        WorldImage img = new FromFileImage("src/pieces/" + pieceFolder + "/" + piece.filename());
         img = new ScaleImage(img, tileSize / img.getWidth());
         scene.placeImageXY(img, tileSize * piece.position.x + tileSize / 2, 
             tileSize * piece.position.y + tileSize / 2);
