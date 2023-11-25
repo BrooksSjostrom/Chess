@@ -59,7 +59,6 @@ public class ChessGame extends World implements ActionListener, ItemListener {
 //    this(new Human("Black", Color.BLACK), new Human("White", Color.WHITE));
 //    this(new GNUChessAI("Black", ChessColor.BLACK, 1000), new Human("White", ChessColor.WHITE));
     this(new AlphaBetaPruningAI("Black", ChessColor.BLACK), new Human("White", ChessColor.WHITE));
-//    this(new GNUChessAI("Black", Color.BLACK, 100), new GNUChessAI("White", Color.WHITE, 100));
   }
 
   public ChessGame(Player black, Player white) {
