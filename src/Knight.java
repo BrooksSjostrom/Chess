@@ -63,10 +63,6 @@ public class Knight extends ShortMovingPiece {
     return false;
   }
 
-  int positionScore() {
-    return PieceTables.KNIGHT_POSITION_TABLE[this.position.y * 16 + this.position.x];
-  }
-
   String uppercaseLetter() {
     return "N";
   }

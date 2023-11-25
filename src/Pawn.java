@@ -133,10 +133,6 @@ public class Pawn extends Piece {
     return true;
   }
 
-  int positionScore() {
-    return this.color.equals(Color.WHITE) ? PieceTables.WPAWN_POSITION_TABLE[this.position.y * 16 + this.position.x] : PieceTables.BPAWN_POSITION_TABLE[this.position.y * 16 + this.position.x];
-  }
-
   String uppercaseLetter() {
     return "";
   }

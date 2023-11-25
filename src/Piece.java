@@ -62,8 +62,6 @@ public abstract class Piece {
   
   abstract boolean justMovedTwo();
   
-  abstract int positionScore();
-  
   abstract String uppercaseLetter();
 
   public void playSound() {

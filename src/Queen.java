@@ -70,10 +70,6 @@ public class Queen extends LongMovingPiece {
     return false;
   }
 
-  int positionScore() {
-    return PieceTables.QUEEN_POSITION_TABLE[this.position.y * 16 + this.position.x];
-  }
-
   String uppercaseLetter() {
     return "Q";
   }

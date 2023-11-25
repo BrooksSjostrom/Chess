@@ -94,10 +94,6 @@ public class King extends ShortMovingPiece {
     return false;
   }
 
-  int positionScore() {
-    return this.color.equals(ChessColor.WHITE) ? PieceTables.WKING_POSITION_TABLE[this.position.y * 16 + this.position.x] : PieceTables.BKING_POSITION_TABLE[this.position.y * 16 + this.position.x];
-  }
-
   String uppercaseLetter() {
     return "K";
   }
